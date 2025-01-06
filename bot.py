@@ -42,5 +42,17 @@ async def leaderboard(ctx):
         message += f'{rank}. {user} - {total_time} minutes\n'
     await ctx.send(message)
 
+# Command: Display user's workout history
+@bot.command()
+async def your_history(ctx):
+    user = ctx.author.name
+    if user not in workout_logs or not workout_logs[user]:
+        await ctx.send(f"{user}, you don't have any workout history yet. Use `!log <muscle> <duration>` to log your first workout!")
+        return
+
+    # Format the user's workout history
+    history = "\n".join([f"{muscle} - {duration} minutes" for muscle, duration in workout_logs[user]])
+    await ctx.send(f"**{user}'s Workout History:**\n{history}")
+
 # Run the bot
 bot.run(os.getenv('DISCORD_TOKEN'))
