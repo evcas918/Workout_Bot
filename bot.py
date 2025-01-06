@@ -1,4 +1,5 @@
 import discord
+import os
 from discord.ext import commands
 
 # Set up intents
@@ -42,4 +43,4 @@ async def leaderboard(ctx):
     await ctx.send(message)
 
 # Run the bot
-bot.run('DISCORD_BOT_TOKEN')
+bot.run(os.getenv('DISCORD_TOKEN'))
